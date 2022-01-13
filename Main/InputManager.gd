@@ -1,16 +1,19 @@
 extends Spatial
 
 var ray_length = 1000
-var player : KinematicBody
+var player : Player
+var cameraCont : CameraController
+
+var oldMousePos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_parent().get_node("Player")
-
-
+	cameraCont = get_viewport().get_camera()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_just_pressed("lmb")):
+	if Input.is_action_just_pressed("rmb"):
 		var camera = get_viewport().get_camera()
 		var mouse_pos = get_viewport().get_mouse_position()
 		var from = camera.project_ray_origin(mouse_pos)
@@ -19,6 +22,14 @@ func _process(delta):
 		var results =  space_state.intersect_ray(from, to)
 		if results.size() > 0:
 			var ray_pos = results["position"]
-			print(ray_pos)
-			player.translation = ray_pos + Vector3(0, 1.0, 0)
-	pass
+			var target_location = ray_pos
+			player.move_to_location(target_location)
+	
+	# camera controls
+	if Input.is_action_just_pressed("lmb"):
+		oldMousePos = get_viewport().get_mouse_position()
+	if Input.is_action_pressed("lmb"):
+		var curMousePos = get_viewport().get_mouse_position()
+		var mouseOffset = curMousePos - oldMousePos
+		cameraCont.orbit_cam(mouseOffset.x)
+		oldMousePos = get_viewport().get_mouse_position()		
