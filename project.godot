@@ -30,6 +30,11 @@ config/name="room-explorer"
 run/main_scene="res://Main/sandbox.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1536
+window/size/height=900
+
 [input]
 
 lmb={
@@ -49,4 +54,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Models/default_env.tres"

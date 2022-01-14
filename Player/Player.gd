@@ -2,8 +2,8 @@ extends KinematicBody
 
 class_name Player
 
-export var moveLerpSpeed = 0.1
-export var maxAccel = .75
+export var moveLerpSpeed = 0.05
+export var maxAccel = .5
 var targetLocation
 var velocity = Vector3()
 var drag = 0.4

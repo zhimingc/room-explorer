@@ -1,16 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Main/InputManager.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Player/monster_basic_0.png" type="Texture" id=3]
+[ext_resource path="res://Player/toem-knockoff.png" type="Texture" id=3]
 [ext_resource path="res://Main/CameraController.gd" type="Script" id=4]
+[ext_resource path="res://Objects/crate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Textures/tree-plane.png" type="Texture" id=6]
+[ext_resource path="res://Textures/grass-plane.png" type="Texture" id=7]
 
 [sub_resource type="PlaneMesh" id=1]
 
+[sub_resource type="SpatialMaterial" id=5]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0.807843, 0.807843, 0.807843, 1 )
+
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 0.1, 1 )
-
-[sub_resource type="CapsuleMesh" id=3]
 
 [sub_resource type="CapsuleShape" id=4]
 
@@ -21,7 +27,7 @@ transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
@@ -31,25 +37,175 @@ shape = SubResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.642788, -0.478943, 0.597861, 0, 0.780452, 0.625216, -0.766044, -0.401881, 0.501665, 23, 25, 19 )
+transform = Transform( 0.642788, -0.439385, 0.627507, 0, 0.819152, 0.573577, -0.766044, -0.368688, 0.526541, 20, 22, 16 )
 far = 1000.0
 script = ExtResource( 4 )
-cameraArm = Vector3( 23, 25, 19 )
+cameraArm = Vector3( 20, 22, 16 )
 
 [node name="Player" type="KinematicBody" parent="."]
 script = ExtResource( 2 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-visible = false
-mesh = SubResource( 3 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 shape = SubResource( 4 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 3, 0 )
 billboard = 1
 double_sided = false
 texture = ExtResource( 3 )
+
+[node name="crate-cube-textured" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -21.3798, 3, 21.2825 )
+
+[node name="crate-cube-textured2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -18.7913, 3, -16.4882 )
+
+[node name="crate-cube-textured3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -18.7913, 3, -10.4882 )
+
+[node name="crate-cube-textured5" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -18.7913, 9, -13.4882 )
+
+[node name="tree-planes" type="Spatial" parent="."]
+transform = Transform( 0.928725, 0, 0.370768, 0, 1, 0, -0.370768, 0, 0.928725, 16.1638, 0, -18.0952 )
+
+[node name="tree" type="Sprite3D" parent="tree-planes"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree2" type="Sprite3D" parent="tree-planes"]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree-planes2" type="Spatial" parent="."]
+transform = Transform( 0.827022, 0, -0.56217, 0, 1, 0, 0.56217, 0, 0.827022, 19.769, 0, -14.9904 )
+
+[node name="tree" type="Sprite3D" parent="tree-planes2"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree2" type="Sprite3D" parent="tree-planes2"]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree-planes3" type="Spatial" parent="."]
+transform = Transform( 0.349864, 0, 0.9368, 0, 1, 0, -0.9368, 0, 0.349864, 16.8459, 0, -12.254 )
+
+[node name="tree" type="Sprite3D" parent="tree-planes3"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree2" type="Sprite3D" parent="tree-planes3"]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree-planes4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7931, 0, -15.4971 )
+
+[node name="tree" type="Sprite3D" parent="tree-planes4"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree2" type="Sprite3D" parent="tree-planes4"]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree-planes5" type="Spatial" parent="."]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 21.7435, 0, 20.3936 )
+
+[node name="tree" type="Sprite3D" parent="tree-planes5"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="tree2" type="Sprite3D" parent="tree-planes5"]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, 0, 7, 0 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="all-grass" type="Spatial" parent="."]
+
+[node name="grass" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -13.3396, 1, -8.63321 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass2" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -15.0473, 1, -8.64264 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass3" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -14.707, 1, -10.902 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass4" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -20.4997, 1, -6.31345 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass5" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -14.7868, 1, -18.4122 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass6" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 17.1374, 1, -7.52903 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass7" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 18.1672, 1, -8.30716 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass8" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 19.3547, 1, -8.1165 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass9" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 19.6103, 1, -9.42832 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass10" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 20.8021, 0.999998, -9.11495 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="grass11" type="Sprite3D" parent="all-grass"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -20.6008, 0.999994, 16.6709 )
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 7 )

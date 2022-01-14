@@ -33,3 +33,15 @@ func _process(delta):
 		var mouseOffset = curMousePos - oldMousePos
 		cameraCont.orbit_cam(mouseOffset.x)
 		oldMousePos = get_viewport().get_mouse_position()		
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			# zoom in
+			if event.button_index == BUTTON_WHEEL_UP:
+				# call the zoom function
+				cameraCont.zoom_cam(-1)
+			# zoom out
+			if event.button_index == BUTTON_WHEEL_DOWN:
+				cameraCont.zoom_cam(1)				
+		
